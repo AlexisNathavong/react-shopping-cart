@@ -3,9 +3,13 @@ import { Route } from 'react-router-dom';
 import data from './data';
 
 //Imported Components
-import ProductContext from './contexts/ProductContext';
 import ShoppingCart from './components/ShoppingCart';
 import Products from './components/Products';
+import Navigation from './components/Navigation';
+
+//Imported Contexts
+import ProductContext from './contexts/ProductContext';
+import CartContext from './contexts/CartContext';
 
 function App() {
 	const [products] = useState(data);
@@ -17,8 +21,9 @@ function App() {
 
 	return (
 		<ProductContext.Provider value={{products, addItem}}>
+			<CartContext.Provider value={cart}>
 				<div className="App">
-					
+					<Navigation cart={cart} />
 
 					{/* Routes */}
 					<Route 
@@ -33,6 +38,7 @@ function App() {
 
 					
 				</div>
+			</CartContext.Provider>
 		</ProductContext.Provider>
 	);
 }
